@@ -1,8 +1,9 @@
-
 import './App.css';
 import styled from 'styled-components';
 import React, {useState, useEffect} from 'react';
 import TapMusic from './Components/TapMusic';
+import Recorder from './Components/Recorder';
+
 
 // Styled components
 const MainWrapper = styled.div`
@@ -64,10 +65,30 @@ const MusicBox = styled.div`
   align-items: center;
 `
 
+const Home = styled.div`
+  position: fixed;
+  z-index: 1;
+  top: -10px;
+  right: 10px;
+  
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const Background = styled.div`
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  background: linear-gradient(90deg, rgba(45,250,221,1) 0%, rgba(29,185,253,1) 47%, rgba(201,69,252,1) 98%);
+  background-size: 300% 300%;
+` 
+
 
 function App() {
-
-  var [headerContent, setHeaderContent] = useState();
 
   var [mainContent, setMainContent] = useState(
     <MainWrapper>
@@ -85,21 +106,32 @@ function App() {
     // Update the state
     setMainContent(
       <MainWrapper>
+        <Background id="Background">
+          
+          <Recorder></Recorder>
+          <Home onClick={() => {setMainContent(
+            <MainWrapper>
+              <TitleWrapper>
+                <TitleInit>Giorgio</TitleInit>
+                <Slogan>A colorful Drum Pad</Slogan>
+                <StartButton onClick={() => {startApp()}}>START</StartButton>
+              </TitleWrapper>
+            </MainWrapper>)}}>
+            <p>&#127968;</p>
+          </Home>
+
+        </Background>
+          
         <MusicBox>          
           <TapMusic></TapMusic>
         </MusicBox>
       </MainWrapper>
     )
-
-    
   }
 
   
   return (
     <div className="App">
-      <header className="App-header">
-        {headerContent}
-      </header>
       <main>
         {mainContent}
       </main>
