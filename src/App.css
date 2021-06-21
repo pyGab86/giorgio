@@ -22,6 +22,66 @@
   }
 }
 
+@-webkit-keyframes text-animation {
+  0% {
+    color: #969696;
+  }
+  50% {
+    color: white;
+  }
+  100% {
+    color: #969696;
+  }
+}
+
+@keyframes text-animation {
+  0% {
+    color: #969696;
+  }
+  50% {
+    color: white;
+  }
+  100% {
+    color: #969696;
+  }
+}
+
+@-webkit-keyframes start-animation {
+  0% {
+    color: #f4f131;
+  }
+  21% {
+    color: #f26439;
+  }
+  42% {
+    color: #3999ee;
+  }
+  63% {
+    color: #f26439;
+  }
+  83% {
+    color: #f4f131;
+  }
+}
+
+@keyframes start-animation {
+  0% {
+    color: #f4f131;
+  }
+  21% {
+    color: #f26439;
+  }
+  42% {
+    color: #3999ee;
+  }
+  63% {
+    color: #f26439;
+  }
+  83% {
+    color: #f4f131;
+  }
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -39,7 +99,21 @@ body #root .App {
 }
 
 body #root .App #Background {
-  -webkit-animation: background-animation 10s ease-in-out infinite;
-          animation: background-animation 10s ease-in-out infinite;
+  -webkit-animation: background-animation 20s ease-in-out infinite;
+          animation: background-animation 20s ease-in-out infinite;
+}
+
+body #root .App img:active {
+  width: 10px;
+}
+
+body #root .App #tuto-text {
+  -webkit-animation: text-animation 3s ease-in-out infinite;
+          animation: text-animation 3s ease-in-out infinite;
+}
+
+body #root .App #start {
+  -webkit-animation: start-animation 6s ease-in-out infinite;
+          animation: start-animation 6s ease-in-out infinite;
 }
 /*# sourceMappingURL=App.css.map */

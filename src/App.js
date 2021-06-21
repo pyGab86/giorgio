@@ -52,17 +52,9 @@ const StartButton = styled.button`
 
 const MusicBox = styled.div`
   display: flex;
-  width: 95%;
-  max-width: 700px;
-  height: 40%;
-  position: absolute;
-  bottom: 15px;
-  border-radius: 10px;
-  background-color: rgba(200, 200, 200, 0.15);
-  backdrop-filter: blur(5px);
-  box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+  width: 100%;
+  height: 100%;
   justify-content: center;
-  align-items: center;
 `
 
 const Home = styled.div`
@@ -83,10 +75,43 @@ const Background = styled.div`
   height: 100%;
   max-width: 100%;
   max-height: 100%;
-  background: linear-gradient(90deg, rgba(45,250,221,1) 0%, rgba(29,185,253,1) 47%, rgba(201,69,252,1) 98%);
+  background: #de6161;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(-90deg, #2657eb, #de6161);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(-90deg, #2657eb, #de6161); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   background-size: 300% 300%;
 ` 
 
+const TutoWrapper = styled.div`
+  position: fixed;
+  bottom: 50px;
+  background: linear-gradient(180deg, rgba(244,241,49,1) 0%, rgba(242,100,57,1) 42%, rgba(57,153,238,1) 83%);
+  width: 90%;
+  height: 120px;
+  box-shadow: 5px 2px 10px rgb(0,0,0);
+  max-width: 600px;
+
+`
+
+const Tuto = styled.div`
+  margin-left: 3px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(22, 22, 22);
+  border-radius: 0px 5px 5px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const TutoText = styled.p`
+  color: rgb(150, 150, 150);
+  font-size: 15px;
+  margin-top: 0px;
+  text-align: center;
+  margin-inline: 10px;
+  margin-top: 10px;
+`
 
 function App() {
 
@@ -95,8 +120,13 @@ function App() {
       <TitleWrapper>
         <TitleInit>Giorgio</TitleInit>
         <Slogan>A colorful Drum Pad</Slogan>
-        <StartButton onClick={() => {startApp()}}>START</StartButton>
+        <StartButton id="start" onClick={() => {startApp()}}>START</StartButton>
       </TitleWrapper>
+      <TutoWrapper>
+        <Tuto>
+          <TutoText id="tuto-text">Use your numeric keyboard or <br/> click/tap on the pads to make some songs!</TutoText>
+        </Tuto>
+      </TutoWrapper>
     </MainWrapper>
   );
 
@@ -114,15 +144,20 @@ function App() {
               <TitleWrapper>
                 <TitleInit>Giorgio</TitleInit>
                 <Slogan>A colorful Drum Pad</Slogan>
-                <StartButton onClick={() => {startApp()}}>START</StartButton>
+                <StartButton id="start" onClick={() => {startApp()}}>START</StartButton>
               </TitleWrapper>
+              <TutoWrapper>
+                <Tuto>
+                  <TutoText id="tuto-text">Use your numeric keyboard or <br/> click/tap on the pads to make some songs!</TutoText>
+                </Tuto>
+              </TutoWrapper>
             </MainWrapper>)}}>
             <p>&#127968;</p>
           </Home>
 
         </Background>
           
-        <MusicBox>          
+        <MusicBox id="box">          
           <TapMusic></TapMusic>
         </MusicBox>
       </MainWrapper>

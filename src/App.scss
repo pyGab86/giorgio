@@ -4,6 +4,20 @@
     50% {background-position: 100%;}
     100% {background-position: 0%;}
 }
+
+@keyframes text-animation {
+    0% {color: rgb(150, 150, 150)}
+    50% {color: white}
+    100% {color: rgb(150, 150, 150)}
+}
+
+@keyframes start-animation {
+    0% {color: rgba(244,241,49,1)}
+    21% {color: rgba(242,100,57,1)}
+    42% {color: rgba(57,153,238,1)}
+    63% {color: rgba(242,100,57,1)}
+    83% {color: rgba(244,241,49,1)}
+}
     
 body {
     margin: 0px;
@@ -19,11 +33,20 @@ body {
             padding: 0px;
 
             #Background {
-                animation: background-animation 10s ease-in-out infinite;
+                animation: background-animation 20s ease-in-out infinite;
             }
 
-            
+            img:active {
+                width: 10px;
+            }
 
+            #tuto-text {
+                animation: text-animation 3s ease-in-out infinite;
+            }
+
+            #start {
+                animation: start-animation 6s ease-in-out infinite;
+            }
         }
     }
 }
