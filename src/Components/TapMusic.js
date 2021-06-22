@@ -16,9 +16,6 @@ import snare from '../assets/snare.mp3';
 import rattle from '../assets/rattle.mp3';
 
 
-const activePadColor = "hotpink";
-
-
 const ButtonsGrid = styled.div`
     display: grid;
     grid: repeat(4, 25%) / repeat(3, 33.33%);
@@ -36,6 +33,10 @@ const MusicButton = styled.div`
 
     &:active {
         background-color: rgb(33, 33, 33, 0.6);
+    }
+
+    &:hover {
+        cursor: pointer;
     }
 
 `

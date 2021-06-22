@@ -87,7 +87,6 @@ const TutoWrapper = styled.div`
   bottom: 50px;
   background: linear-gradient(180deg, rgba(244,241,49,1) 0%, rgba(242,100,57,1) 42%, rgba(57,153,238,1) 83%);
   width: 90%;
-  height: 120px;
   box-shadow: 5px 2px 10px rgb(0,0,0);
   max-width: 600px;
 
@@ -124,7 +123,7 @@ function App() {
       </TitleWrapper>
       <TutoWrapper>
         <Tuto>
-          <TutoText id="tuto-text">Use your numeric keyboard or <br/> click/tap on the pads to make some songs!</TutoText>
+          <TutoText id="tuto-text">1 - Press R or click the record button<br/>2 - Use your numeric keyboard or click/tap on the pads<br/>3 - Press S or click the record button<br/>4 - Press the play or loop button to listen to your creation</TutoText>
         </Tuto>
       </TutoWrapper>
     </MainWrapper>
@@ -148,7 +147,7 @@ function App() {
               </TitleWrapper>
               <TutoWrapper>
                 <Tuto>
-                  <TutoText id="tuto-text">Use your numeric keyboard or <br/> click/tap on the pads to make some songs!</TutoText>
+                  <TutoText id="tuto-text">1 - Press R or click the record button<br/>2 - Use your numeric keyboard or click/tap on the pads<br/>3 - Press S or click the record button<br/>4 - Press the play or loop button to listen to your creation</TutoText>
                 </Tuto>
               </TutoWrapper>
             </MainWrapper>)}}>
