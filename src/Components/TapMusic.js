@@ -14,6 +14,7 @@ import mono3 from '../assets/mono3.mp3';
 import shake from '../assets/shake.mp3';
 import snare from '../assets/snare.mp3';
 import rattle from '../assets/rattle.mp3';
+import music from '../assets/visuals/music-note.svg';
 
 
 const ButtonsGrid = styled.div`
@@ -30,6 +31,9 @@ const MusicButton = styled.div`
     background-color: rgba(33, 33, 33, 0.3);
     margin: 3px;
     border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-center: center;
 
     &:active {
         background-color: rgb(33, 33, 33, 0.6);
@@ -187,6 +191,7 @@ function TapMusic() {
                     });
                     manageRecord();
                 } else {
+                    setSong([...song, {note: 'end', time: Date.now(), id: Math.random()}]);
                     console.log('Stop. Song:', song);
                     Store.dispatch({
                         type: 'REC',
@@ -281,8 +286,7 @@ function TapMusic() {
             case 'R':
 
                 if (!currentRecordingBool) {
-                    console.log('Recordiiiing');
-                    setSong([...song, {note: 'start', time: Date.now()}])
+                    setSong([...song, {note: 'start', time: Date.now(), id: Math.random()}])
                     Store.dispatch({
                         type: 'REC',
                         payload: {recording: true}
@@ -297,7 +301,7 @@ function TapMusic() {
             case 'S':
 
                 if (currentRecordingBool) {
-                    console.log('Stop. Song:', song);
+                    
                     Store.dispatch({
                         type: 'REC',
                         payload: {recording: false}
@@ -306,7 +310,7 @@ function TapMusic() {
                     // Save our song to the store and delete local state song
                     Store.dispatch({
                         type: 'ADD_SONG',
-                        payload: {songs: song}
+                        payload: {songs: [...song, {note: 'end', time: Date.now(), id: Math.random()}]}
                     });
 
                     setSong([]);
@@ -331,18 +335,42 @@ function TapMusic() {
 
             <GridWrapper>
                 <ButtonsGrid>
-                    <MusicButton id="7" onClick={() => {buttonClicked('7')}}></MusicButton>
-                    <MusicButton id="8" onClick={() => {buttonClicked('8')}}></MusicButton>
-                    <MusicButton id="9" onClick={() => {buttonClicked('9')}}></MusicButton>
-                    <MusicButton id="4" onClick={() => {buttonClicked('4')}}></MusicButton>
-                    <MusicButton id="5" onClick={() => {buttonClicked('5')}}></MusicButton>
-                    <MusicButton id="6" onClick={() => {buttonClicked('6')}}></MusicButton>
-                    <MusicButton id="1" onClick={() => {buttonClicked('1')}}></MusicButton>
-                    <MusicButton id="2" onClick={() => {buttonClicked('2')}}></MusicButton>
-                    <MusicButton id="3" onClick={() => {buttonClicked('3')}}></MusicButton>
-                    <MusicButton id="ArrowRight" onClick={() => {buttonClicked('ArrowRight')}}></MusicButton>
-                    <MusicButton id="0" onClick={() => {buttonClicked('0')}}></MusicButton>
-                    <MusicButton id="." onClick={() => {buttonClicked('.')}}></MusicButton>
+                    <MusicButton id="7" onClick={() => {buttonClicked('7')}}>
+                        <img id="note" src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="8" onClick={() => {buttonClicked('8')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="9" onClick={() => {buttonClicked('9')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="4" onClick={() => {buttonClicked('4')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="5" onClick={() => {buttonClicked('5')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="6" onClick={() => {buttonClicked('6')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="1" onClick={() => {buttonClicked('1')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="2" onClick={() => {buttonClicked('2')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="3" onClick={() => {buttonClicked('3')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="ArrowRight" onClick={() => {buttonClicked('ArrowRight')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="0" onClick={() => {buttonClicked('0')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
+                    <MusicButton id="." onClick={() => {buttonClicked('.')}}>
+                        <img src={music} alt='' width='10%' height='auto'></img>
+                    </MusicButton>
                 </ButtonsGrid>
             </GridWrapper>
         </>

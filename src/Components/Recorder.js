@@ -14,6 +14,7 @@ import mono2 from '../assets/mono2.mp3';
 import mono3 from '../assets/mono3.mp3';
 import shake from '../assets/shake.mp3';
 import snare from '../assets/snare.mp3';
+import rattle from '../assets/rattle.mp3';
 import play from '../assets/visuals/play.svg';
 import repeat from '../assets/visuals/arrow-repeat.svg';
 
@@ -65,6 +66,7 @@ const Recorder = () => {
     const [playSnare] = useSound(snare);
     const [playShake] = useSound(shake);
     const [playMono3] = useSound(mono3);
+    const [playRattle] = useSound(rattle);
 
     Store.subscribe(() => {
         setSong(Store.getState().songs[Store.getState().songs.length - 1].songs);
@@ -148,7 +150,7 @@ const Recorder = () => {
                                     playShake();
                                     break;
                                 case '9':
-                                    playMono();
+                                    playRattle();
                                     break;
                                 default:
                                     break
@@ -196,18 +198,22 @@ const Recorder = () => {
             playersLoop[songId] = playing;
             setSongs([...songs,
                 <SongBox>
-                    <img id={songId} src={play} alt='could not load asset' width='20px' height='20px' onClick={() => {
+
+                    
+                    <img className="Play" id={songId} src={play} alt='could not load asset' width='20px' height='20px' onClick={() => {
                         players[songId] = !players[songId];
                         playSong(song, false, songId, players);
                     }}>
 
                     </img>
-                    <img id={songId} src={repeat} alt='could not load asset' width='20px' height='20px' onClick={() => {
+
+                    <img className="Play" id={songId} src={repeat} alt='could not load asset' width='20px' height='20px' onClick={() => {
                         playersLoop[songId] = !playersLoop[songId];
                         playSong(song, true, songId, playersLoop);
                     }}>
 
                     </img>
+
                 </SongBox>
             ]);
         }

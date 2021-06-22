@@ -14,6 +14,7 @@ const MainWrapper = styled.div`
   padding: 0px;
   display: flex;
   justify-content: center;
+  max-height: 100%;
 `
 
 const TitleWrapper = styled.div`
@@ -89,11 +90,11 @@ const TutoWrapper = styled.div`
   width: 90%;
   box-shadow: 5px 2px 10px rgb(0,0,0);
   max-width: 600px;
-
+  border-radius: 5px;
 `
 
 const Tuto = styled.div`
-  margin-left: 3px;
+  margin-left: 2px;
   width: 100%;
   height: 100%;
   background-color: rgb(22, 22, 22);
@@ -105,7 +106,7 @@ const Tuto = styled.div`
 
 const TutoText = styled.p`
   color: rgb(150, 150, 150);
-  font-size: 15px;
+  font-size: 14px;
   margin-top: 0px;
   text-align: center;
   margin-inline: 10px;
@@ -118,7 +119,7 @@ function App() {
     <MainWrapper>
       <TitleWrapper>
         <TitleInit>Giorgio</TitleInit>
-        <Slogan>A colorful Drum Pad</Slogan>
+        <Slogan>A Colorful Drum Pad</Slogan>
         <StartButton id="start" onClick={() => {startApp()}}>START</StartButton>
       </TitleWrapper>
       <TutoWrapper>
@@ -142,7 +143,7 @@ function App() {
             <MainWrapper>
               <TitleWrapper>
                 <TitleInit>Giorgio</TitleInit>
-                <Slogan>A colorful Drum Pad</Slogan>
+                <Slogan>A Colorful Drum Pad</Slogan>
                 <StartButton id="start" onClick={() => {startApp()}}>START</StartButton>
               </TitleWrapper>
               <TutoWrapper>
