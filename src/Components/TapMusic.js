@@ -101,6 +101,7 @@ function TapMusic() {
     const [song, setSong] = useState([]);
     const [isRecording, setIsRecording] = useState(false);
     const [text, setText] = useState('Press R to start recording');
+    const [nbSongs, setNbSongs] = useState(0);
 
     const keys = ['ArrowRight', '0', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
@@ -113,10 +114,14 @@ function TapMusic() {
 
     const manageRecord = () => {
         setIsRecording(!isRecording);
-        if (!isRecording) {
+        if (!isRecording && nbSongs < 6) {
             setText('Recording... Press S to stop');
-        } else {
+        } else if (nbSongs < 6) {
             setText('Press R to start recording');
+        }
+
+        if (nbSongs === 6) {
+            setText('You can only record 6 songs')
         }
     }
 
@@ -182,17 +187,16 @@ function TapMusic() {
                 break;
 
             case 'rec':
-                if (!currentRecordingBool) {
-                    console.log('Recordiiiing');
+                if (!currentRecordingBool && nbSongs < 6) {
                     setSong([...song, {note: 'start', time: Date.now()}])
                     Store.dispatch({
                         type: 'REC',
                         payload: {recording: true}
                     });
                     manageRecord();
+                    setNbSongs(nbSongs+1);
                 } else {
                     setSong([...song, {note: 'end', time: Date.now(), id: Math.random()}]);
-                    console.log('Stop. Song:', song);
                     Store.dispatch({
                         type: 'REC',
                         payload: {recording: false}
@@ -208,10 +212,13 @@ function TapMusic() {
                     manageRecord();
                 }
 
+                if (nbSongs === 6) {
+                    manageRecord();
+                }
+
                 break;
               
             default:
-                console.log('unknown pad');
                 break;
         }
     }
@@ -285,13 +292,17 @@ function TapMusic() {
             case 'r':                
             case 'R':
 
-                if (!currentRecordingBool) {
+                if (!currentRecordingBool && nbSongs < 6) {
                     setSong([...song, {note: 'start', time: Date.now(), id: Math.random()}])
                     Store.dispatch({
                         type: 'REC',
                         payload: {recording: true}
                     });
 
+                    manageRecord();
+                    setNbSongs(nbSongs+1);
+
+                } else if (nbSongs === 6) {
                     manageRecord();
                 }
 
@@ -321,7 +332,6 @@ function TapMusic() {
                 break;
               
             default:
-                console.log('unknown pad');
                 break;
         }
     }

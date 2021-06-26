@@ -18,6 +18,17 @@
     63% {color: rgba(242,100,57,1)}
     83% {color: rgba(244,241,49,1)}
 }
+
+@keyframes loop-animation {
+    from {transform: rotate(0deg)}
+    to {transform: rotate(359deg)}
+}
+
+@keyframes global-animation {
+    0% {background-position: 0%;}
+    50% {background-position: 100%;}
+    100% {background-position: 0%;}
+}
     
 body {
     margin: 0px;
@@ -36,8 +47,9 @@ body {
                 animation: background-animation 20s ease-in-out infinite;
             }
 
-            img:active {
-                width: 10px;
+            .Play:active {
+                width: 15px;
+                margin-right: 5px;
             }
 
             #tuto-text {
@@ -46,6 +58,10 @@ body {
 
             #start {
                 animation: start-animation 6s ease-in-out infinite;
+            }
+
+            #global {
+                animation: global-animation 2s linear infinite;
             }
         }
     }

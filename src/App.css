@@ -82,6 +82,52 @@
   }
 }
 
+@-webkit-keyframes loop-animation {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+@keyframes loop-animation {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes global-animation {
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+
+@keyframes global-animation {
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -103,8 +149,9 @@ body #root .App #Background {
           animation: background-animation 20s ease-in-out infinite;
 }
 
-body #root .App img:active {
-  width: 10px;
+body #root .App .Play:active {
+  width: 15px;
+  margin-right: 5px;
 }
 
 body #root .App #tuto-text {
@@ -115,5 +162,10 @@ body #root .App #tuto-text {
 body #root .App #start {
   -webkit-animation: start-animation 6s ease-in-out infinite;
           animation: start-animation 6s ease-in-out infinite;
+}
+
+body #root .App #global {
+  -webkit-animation: global-animation 2s linear infinite;
+          animation: global-animation 2s linear infinite;
 }
 /*# sourceMappingURL=App.css.map */

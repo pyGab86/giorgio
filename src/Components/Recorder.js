@@ -17,7 +17,8 @@ import snare from '../assets/snare.mp3';
 import rattle from '../assets/rattle.mp3';
 import play from '../assets/visuals/play.svg';
 import repeat from '../assets/visuals/arrow-repeat.svg';
-
+import playWhite from '../assets/visuals/playwhite.svg';
+import repeatWhite from '../assets/visuals/arrow-repeatwhite.svg';
 
 const SongsWrapper = styled.div`
     position: absolute;
@@ -29,6 +30,11 @@ const SongsWrapper = styled.div`
     top: 270px;
     margin-top: 30px;
     margin-inline: 5%;
+
+    @media screen and (max-width: 500px) {
+        margin-top: 0px;
+        top: 210px;
+    }
     
 `
 
@@ -39,7 +45,9 @@ const SongBox = styled.div`
     border-radius: 17px;
     margin: 5px;
     display: flex;
-    justify-content: space-evenly;
+    padding-inline: 5px;
+    justify-content: space-between;
+
     align-items: center;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.25);
     
@@ -48,10 +56,49 @@ const SongBox = styled.div`
     }
 `
 
+const GlobalWrapper = styled.div`
+    position: absolute;
+    top: 160px;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+
+    @media screen and (max-width: 500px) {
+        top: 140px;
+    }
+
+`
+
+const GlobalPlayer = styled.div`
+    width: 110px;
+    height: 60px;
+    display: flex;
+    color: white;
+    align-items: center;
+    border-radius: 7px;
+    justify-content: space-evenly;
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    box-shadow: 3px 3px 15px rgba(0,0,0,0.2);
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 3px 5px 15px rgba(0,0,0,0.5);
+    }
+
+    @media screen and (max-width: 500px) {
+        height: 50px;
+    }
+
+`
+
 const Recorder = () => {
 
     const [song, setSong] = useState([]);
     const [songs, setSongs] = useState([]);
+    const [songsInfo, setSongsInfo] = useState([]);
+    const [globalSongs, setGlobalSongs] = useState();
     var players = {};
     var playersLoop = {};
 
@@ -101,7 +148,6 @@ const Recorder = () => {
 
             if (!playerObject[songId]) {
                 playing = false;
-                console.log('Playing end');
             } 
 
             if (playing) {
@@ -162,7 +208,6 @@ const Recorder = () => {
                                     playSong(mySong, true, songId, playerObject);
                                     
                                 } else {
-                                    console.log('not playing', loop, playersLoop[songId]);
                                     playing = false;
                                 }
                             }   
@@ -200,29 +245,93 @@ const Recorder = () => {
                 <SongBox>
 
                     
-                    <img className="Play" id={songId} src={play} alt='could not load asset' width='20px' height='20px' onClick={() => {
+                    <img className="Play" id={`${songId} nonloop`} src={play} alt='could not load asset' width='20px' height='20px' onClick={() => {
                         players[songId] = !players[songId];
                         playSong(song, false, songId, players);
                     }}>
 
                     </img>
 
-                    <img className="Play" id={songId} src={repeat} alt='could not load asset' width='20px' height='20px' onClick={() => {
+                    <img className="PlayLoop" id={`${songId} loop`} src={repeat} alt='could not load asset' width='20px' height='20px' onClick={() => {
+                        if (!playersLoop[songId]) {
+                            var element =  document.getElementById(`${songId} loop`);               
+                            element.style.animation = 'loop-animation 1.618s ease-in-out infinite';
+                        } else {
+                            var element =  document.getElementById(`${songId} loop`);
+                            element.style.animation = 'none'
+                        }
                         playersLoop[songId] = !playersLoop[songId];
                         playSong(song, true, songId, playersLoop);
+                        
                     }}>
 
                     </img>
 
                 </SongBox>
             ]);
+
+            setSongsInfo([...songsInfo,
+                {
+                    song,
+                    id: songId
+                }
+            ]);
         }
 
     }, [song]);
 
+    useEffect(() => {
+
+        if (songs.length > 1) {
+            setGlobalSongs(
+                <GlobalPlayer id="global">
+                    <img src={playWhite}
+                        className="Play"
+                        id="nonloop"
+                        alt='could not load asset'
+                        width='20px' height='auto'
+                        onClick={() => {
+                            songsInfo.forEach((info) => {
+                                players[info.id] = !players[info.id];
+                                playSong(info.song, false, info.id, players);
+                            });
+                        }}
+                    />
+
+                    <p>Play all</p>
+
+                    <img src={repeatWhite}
+                        className="PlayLoop"
+                        id="global-loop"
+                        alt='could not load asset'
+                        width='20px' height='auto'
+                        onClick={() => {
+                            songsInfo.forEach((info) => {
+                                if (!playersLoop[info.id]) {
+                                    var element =  document.getElementById('global-loop');               
+                                    element.style.animation = 'loop-animation 1.618s ease-in-out infinite';
+                                } else {
+                                    var element =  document.getElementById('global-loop');
+                                    element.style.animation = 'none' 
+                                }
+                                playersLoop[info.id] = !playersLoop[info.id];
+                                playSong(info.song, true, info.id, playersLoop);
+                            });
+                        }}
+                    />
+
+                </GlobalPlayer>
+            )
+        }
+    }, [songs])
+
     return <>
+        <GlobalWrapper>
+            {globalSongs}
+        </GlobalWrapper>
         
         <SongsWrapper>
+            
             {songs}
         </SongsWrapper>
         
