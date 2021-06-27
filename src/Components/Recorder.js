@@ -3,22 +3,23 @@ import {useState, useEffect} from 'react';
 import Store from '../Store';
 
 import useSound from 'use-sound';
-import kik from '../assets/DevastKick.wav';
-import kik1 from '../assets/GO_TO_808_E.wav';
-import beep from '../assets/beep.mp3';
-import clap from '../assets/clap.mp3';
-import female_voice from '../assets/female_voice.mp3';
-import mono from '../assets/mono.mp3';
-import mono1 from '../assets/mono1.mp3';
-import mono2 from '../assets/mono2.mp3';
-import mono3 from '../assets/mono3.mp3';
-import shake from '../assets/shake.mp3';
-import snare from '../assets/snare.mp3';
-import rattle from '../assets/rattle.mp3';
+import ar from '../assets/clap.mp3';
+import zero from '../assets/DevastKick.wav';
+import point from '../assets/bass.mp3';
+import one from '../assets/oh.mp3';
+import two from '../assets/ESynth_0.mp3';
+import three from '../assets/bass_note.mp3';
+import four from '../assets/ESynth_2.mp3';
+import five from '../assets/ESynth_3.mp3';
+import six from '../assets/ESynth_5.mp3';
+import seven from '../assets/cut223_0.mp3';
+import eight from '../assets/cut223_2.mp3';
+import nine from '../assets/cut223_4.mp3';
 import play from '../assets/visuals/play.svg';
 import repeat from '../assets/visuals/arrow-repeat.svg';
 import playWhite from '../assets/visuals/playwhite.svg';
 import repeatWhite from '../assets/visuals/arrow-repeatwhite.svg';
+import del from '../assets/visuals/delete.svg';
 
 const SongsWrapper = styled.div`
     position: absolute;
@@ -47,7 +48,6 @@ const SongBox = styled.div`
     display: flex;
     padding-inline: 5px;
     justify-content: space-between;
-
     align-items: center;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.25);
     
@@ -60,7 +60,6 @@ const GlobalWrapper = styled.div`
     position: absolute;
     top: 160px;
     width: 100%;
-    max-width: 800px;
     display: flex;
     justify-content: center;
 
@@ -99,21 +98,23 @@ const Recorder = () => {
     const [songs, setSongs] = useState([]);
     const [songsInfo, setSongsInfo] = useState([]);
     const [globalSongs, setGlobalSongs] = useState();
+    const [songsIndexes, setSongsIndexes] = useState([]);
+
     var players = {};
     var playersLoop = {};
 
-    const [playKick] = useSound(kik);
-    const [playKick1] = useSound(kik1);
-    const [playBeep] = useSound(beep);
-    const [playClap] = useSound(clap);
-    const [playFemaleVoice] = useSound(female_voice);
-    const [playMono] = useSound(mono);
-    const [playMono1] = useSound(mono1);
-    const [playMono2] = useSound(mono2);
-    const [playSnare] = useSound(snare);
-    const [playShake] = useSound(shake);
-    const [playMono3] = useSound(mono3);
-    const [playRattle] = useSound(rattle);
+    const [playar] = useSound(ar);
+    const [playzero] = useSound(zero);
+    const [playpoint] = useSound(point);
+    const [playone] = useSound(one);
+    const [playtwo] = useSound(two);
+    const [playthree] = useSound(three);
+    const [playfour] = useSound(four);
+    const [playfive] = useSound(five);
+    const [playsix] = useSound(six);
+    const [playseven] = useSound(seven);
+    const [playeight] = useSound(eight);
+    const [playnine] = useSound(nine);
 
     Store.subscribe(() => {
         setSong(Store.getState().songs[Store.getState().songs.length - 1].songs);
@@ -163,40 +164,40 @@ const Recorder = () => {
 
                             switch (part.note) {
                                 case 'ArrowRight':
-                                    playClap();
+                                    playar();
                                     break;
                                 case '0':
-                                    playKick1();
+                                    playzero();
                                     break;
                                 case '.':
-                                    playKick();
+                                    playpoint();
                                     break;            
                                 case '1':
-                                    playFemaleVoice();
+                                    playone();
                                     break;
                                 case '2':
-                                    playBeep();
+                                    playtwo();
                                     break;
                                 case '3':
-                                    playSnare();
+                                    playthree();
                                     break;
                                 case '4':
-                                    playMono();
+                                    playfour();
                                     break;
                                 case '5':
-                                    playMono1();
+                                    playfive();
                                     break;
                                 case '6':
-                                    playMono2();
+                                    playsix();
                                     break;
                                 case '7':
-                                    playMono3();
+                                    playseven();
                                     break;
                                 case '8':
-                                    playShake();
+                                    playeight();
                                     break;
                                 case '9':
-                                    playRattle();
+                                    playnine();
                                     break;
                                 default:
                                     break
@@ -241,10 +242,10 @@ const Recorder = () => {
             var playing = false;
             players[songId] = playing;
             playersLoop[songId] = playing;
+            setSongsIndexes([...songsIndexes, songsIndexes.length+1]);
             setSongs([...songs,
-                <SongBox>
-
-                    
+                <SongBox key={songsIndexes[songsIndexes.length-1]}>
+                  
                     <img className="Play" id={`${songId} nonloop`} src={play} alt='could not load asset' width='20px' height='20px' onClick={() => {
                         players[songId] = !players[songId];
                         playSong(song, false, songId, players);
@@ -266,6 +267,8 @@ const Recorder = () => {
                     }}>
 
                     </img>
+                    
+                    
 
                 </SongBox>
             ]);
@@ -323,7 +326,7 @@ const Recorder = () => {
                 </GlobalPlayer>
             )
         }
-    }, [songs])
+    }, [songs]);
 
     return <>
         <GlobalWrapper>

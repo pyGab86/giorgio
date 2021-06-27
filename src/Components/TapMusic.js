@@ -2,18 +2,20 @@ import Store from '../Store';
 import styled from 'styled-components';
 import {useState, useEffect} from 'react';
 import useSound from 'use-sound';
-import kik from '../assets/DevastKick.wav';
-import kik1 from '../assets/GO_TO_808_E.wav';
-import beep from '../assets/beep.mp3';
-import clap from '../assets/clap.mp3';
-import female_voice from '../assets/female_voice.mp3';
-import mono from '../assets/mono.mp3';
-import mono1 from '../assets/mono1.mp3';
-import mono2 from '../assets/mono2.mp3';
-import mono3 from '../assets/mono3.mp3';
-import shake from '../assets/shake.mp3';
-import snare from '../assets/snare.mp3';
-import rattle from '../assets/rattle.mp3';
+
+import ar from '../assets/clap.mp3';
+import zero from '../assets/DevastKick.wav';
+import point from '../assets/bass.mp3';
+import one from '../assets/oh.mp3';
+import two from '../assets/ESynth_0.mp3';
+import three from '../assets/bass_note.mp3';
+import four from '../assets/ESynth_2.mp3';
+import five from '../assets/ESynth_3.mp3';
+import six from '../assets/ESynth_5.mp3';
+import seven from '../assets/cut223_0.mp3';
+import eight from '../assets/cut223_2.mp3';
+import nine from '../assets/cut223_4.mp3';
+
 import music from '../assets/visuals/music-note.svg';
 
 
@@ -85,18 +87,18 @@ const GridWrapper = styled.div`
 
 function TapMusic() {
 
-    const [playKick] = useSound(kik);
-    const [playKick1] = useSound(kik1);
-    const [playBeep] = useSound(beep);
-    const [playClap] = useSound(clap);
-    const [playFemaleVoice] = useSound(female_voice);
-    const [playMono] = useSound(mono);
-    const [playMono1] = useSound(mono1);
-    const [playMono2] = useSound(mono2);
-    const [playSnare] = useSound(snare);
-    const [playShake] = useSound(shake);
-    const [playMono3] = useSound(mono3);
-    const [playRattle] = useSound(rattle);
+    const [playar] = useSound(ar);
+    const [playzero] = useSound(zero);
+    const [playpoint] = useSound(point);
+    const [playone] = useSound(one);
+    const [playtwo] = useSound(two);
+    const [playthree] = useSound(three);
+    const [playfour] = useSound(four);
+    const [playfive] = useSound(five);
+    const [playsix] = useSound(six);
+    const [playseven] = useSound(seven);
+    const [playeight] = useSound(eight);
+    const [playnine] = useSound(nine);
 
     const [song, setSong] = useState([]);
     const [isRecording, setIsRecording] = useState(false);
@@ -138,51 +140,51 @@ function TapMusic() {
 
         switch (id) {
             case 'ArrowRight':
-                playClap();
+                playar();
                 noteDispatcher('ArrowRight', Date.now());
                 break;
             case '0':
-                playKick1();
+                playzero();
                 noteDispatcher('0', Date.now());
                 break;
             case '.':
-                playKick();
+                playpoint();
                 noteDispatcher('.', Date.now());
                 break;            
             case '1':
-                playFemaleVoice();
+                playone();
                 noteDispatcher('1', Date.now());
                 break;
             case '2':
-                playBeep();
+                playtwo();
                 noteDispatcher('2', Date.now());
                 break;
             case '3':
-                playSnare();
+                playthree();
                 noteDispatcher('3', Date.now());
                 break;
             case '4':
-                playMono();
+                playfour();
                 noteDispatcher('4', Date.now());
                 break;
             case '5':
-                playMono1();
+                playfive();
                 noteDispatcher('5', Date.now());
                 break;
             case '6':
-                playMono2();
+                playsix();
                 noteDispatcher('6', Date.now());
                 break;
             case '7':
-                playMono3();
+                playseven();
                 noteDispatcher('7', Date.now());
                 break;
             case '8':
-                playShake();
+                playeight();
                 noteDispatcher('8', Date.now());
                 break;
             case '9':
-                playRattle();
+                playnine();
                 noteDispatcher('9', Date.now());
                 break;
 
@@ -196,7 +198,7 @@ function TapMusic() {
                     manageRecord();
                     setNbSongs(nbSongs+1);
                 } else {
-                    setSong([...song, {note: 'end', time: Date.now(), id: Math.random()}]);
+                    setSong([...song]);
                     Store.dispatch({
                         type: 'REC',
                         payload: {recording: false}
@@ -205,7 +207,7 @@ function TapMusic() {
                     // Save our song to the store and delete local state song
                     Store.dispatch({
                         type: 'ADD_SONG',
-                        payload: {songs: song}
+                        payload: {songs: [...song, {note: 'end', time: Date.now(), id: Math.random()}]}
                     });
 
                     setSong([]);
@@ -240,51 +242,51 @@ function TapMusic() {
         
         switch (e.key) {
             case 'ArrowRight':
-                playClap();
+                playar();
                 noteDispatcher('ArrowRight', Date.now());
                 break;
             case '0':
-                playKick1();
+                playzero();
                 noteDispatcher('0', Date.now());
                 break;
             case '.':
-                playKick();
+                playpoint();
                 noteDispatcher('.', Date.now());
                 break;            
             case '1':
-                playFemaleVoice();
+                playone();
                 noteDispatcher('1', Date.now());
                 break;
             case '2':
-                playBeep();
+                playtwo();
                 noteDispatcher('2', Date.now());
                 break;
             case '3':
-                playSnare();
+                playthree();
                 noteDispatcher('3', Date.now());
                 break;
             case '4':
-                playMono();
+                playfour();
                 noteDispatcher('4', Date.now());
                 break;
             case '5':
-                playMono1();
+                playfive();
                 noteDispatcher('5', Date.now());
                 break;
             case '6':
-                playMono2();
+                playsix();
                 noteDispatcher('6', Date.now());
                 break;
             case '7':
-                playMono3();
+                playseven();
                 noteDispatcher('7', Date.now());
                 break;
             case '8':
-                playShake();
+                playeight();
                 noteDispatcher('8', Date.now());
                 break;
             case '9':
-                playRattle();
+                playnine();
                 noteDispatcher('9', Date.now());
                 break;
 

@@ -128,6 +128,36 @@
   }
 }
 
+@-webkit-keyframes play-animation {
+  0% {
+    width: 20px;
+    margin-right: 0px;
+  }
+  50% {
+    width: 15px;
+    margin-right: 5px;
+  }
+  100% {
+    width: 20px;
+    margin-right: 0px;
+  }
+}
+
+@keyframes play-animation {
+  0% {
+    width: 20px;
+    margin-right: 0px;
+  }
+  50% {
+    width: 15px;
+    margin-right: 5px;
+  }
+  100% {
+    width: 20px;
+    margin-right: 0px;
+  }
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -149,11 +179,6 @@ body #root .App #Background {
           animation: background-animation 20s ease-in-out infinite;
 }
 
-body #root .App .Play:active {
-  width: 15px;
-  margin-right: 5px;
-}
-
 body #root .App #tuto-text {
   -webkit-animation: text-animation 3s ease-in-out infinite;
           animation: text-animation 3s ease-in-out infinite;
@@ -164,8 +189,18 @@ body #root .App #start {
           animation: start-animation 6s ease-in-out infinite;
 }
 
-body #root .App #global {
-  -webkit-animation: global-animation 2s linear infinite;
-          animation: global-animation 2s linear infinite;
+body #root .App #global-loop:hover, body #root .App .PlayLoop:hover {
+  -webkit-animation: loop-animation 0.382s ease-in-out;
+          animation: loop-animation 0.382s ease-in-out;
+}
+
+body #root .App .Play:hover {
+  -webkit-animation: play-animation 0.382s ease-in-out;
+          animation: play-animation 0.382s ease-in-out;
+}
+
+body #root .App .Play:active {
+  -webkit-animation: play-animation 1.618s ease-in-out;
+          animation: play-animation 1.618s ease-in-out;
 }
 /*# sourceMappingURL=App.css.map */

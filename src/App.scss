@@ -29,6 +29,12 @@
     50% {background-position: 100%;}
     100% {background-position: 0%;}
 }
+
+@keyframes play-animation {
+    0% {width: 20px; margin-right: 0px;}
+    50% {width: 15px; margin-right: 5px;}
+    100% {width: 20px; margin-right: 0px;}
+}
     
 body {
     margin: 0px;
@@ -47,11 +53,6 @@ body {
                 animation: background-animation 20s ease-in-out infinite;
             }
 
-            .Play:active {
-                width: 15px;
-                margin-right: 5px;
-            }
-
             #tuto-text {
                 animation: text-animation 3s ease-in-out infinite;
             }
@@ -60,8 +61,16 @@ body {
                 animation: start-animation 6s ease-in-out infinite;
             }
 
-            #global {
-                animation: global-animation 2s linear infinite;
+            #global-loop:hover, .PlayLoop:hover {
+                animation: loop-animation 0.382s ease-in-out;
+            }
+
+            .Play:hover {
+                animation: play-animation 0.382s ease-in-out;
+            }
+
+            .Play:active {
+                animation: play-animation 1.618s ease-in-out;
             }
         }
     }
